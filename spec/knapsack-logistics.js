@@ -11,7 +11,7 @@ describe('knapsack_logistics()', function () {
       expect(knapsack_logistics).to.be.a('function');
    });
 
-   it('test single pallet fill', function () {
+   it('single pallet test set 1', function () {
       var x = solveKnapsack(
          [
             [1, 400, 200],
@@ -21,10 +21,9 @@ describe('knapsack_logistics()', function () {
             [5, 500, 300],
 
          ], 1000, 1100);
-      // console.log(x);
    });
 
-   it('test set 2', function () {
+   it('single pallet test set 2', function () {
       var x = solveKnapsack(
          [
             [1, 500, 100],
@@ -47,11 +46,15 @@ describe('knapsack_logistics()', function () {
 
          ]);
 
-      for (var i in x.pallets) {
-         console.log(i + ':' + x.pallets[i].reduce(function (str, item, index) {
-               str += index === 0 ? item[0] : ',' + item[0];
-               return str;
-            }, ''));
-      }
+      expect(x.pallets['A'][0]).to.deep.equal([3, 500, 300]);
+      expect(x.pallets['A'][1]).to.deep.equal([1, 400, 200]);
+      expect(x.pallets['A'][2]).to.deep.equal([4, 200, 200]);
+
+      expect(x.pallets['B'][0]).to.deep.equal([5, 500, 300]);
+      expect(x.pallets['B'][1]).to.deep.equal([2, 400, 200]);
+      expect(x.pallets['B'][2]).to.be.undefined;
+
+      expect(x.pallets['C']).to.be.empty
+
    });
 });
